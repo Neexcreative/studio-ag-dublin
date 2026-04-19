@@ -1,0 +1,573 @@
+/* ═══════════════════════════════════════════════════════════════
+   StudioAGPage — scoped styles for the Studio AG page instance.
+   All rules are namespaced to .studio-ag-page or .sag-* classes.
+   Global tokens, shared blocks, and the NEEX system are untouched.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Root & palette ───────────────────────────────────────────── */
+
+.studio-ag-page {
+  /* Scoped token overrides — active only within this page */
+  --color-brand-primary: #a86860;
+  --color-brand-secondary: #7d4d48;
+  --color-brand-accent: #f0e9e6;
+  --color-background-default: #ffffff;
+  --color-text-primary: #1a1210;
+  --color-text-secondary: #7a6b66;
+  --color-neutral-dark: #1a1210;
+
+  background-color: #ffffff;
+  color: #1a1210;
+}
+
+/* ── Shared block overrides (scoped — do not touch global files) ─ */
+
+/* Generous section rhythm */
+.studio-ag-page .neex-section {
+  padding: var(--space-16) 0;
+}
+
+/* Hero — editorial, not a floating card */
+.studio-ag-page .neex-hero {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: var(--space-20) 0 var(--space-12);
+  align-items: center;
+  text-align: center;
+  gap: var(--space-8);
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.studio-ag-page .neex-hero-actions {
+  justify-content: center;
+}
+
+.studio-ag-page .neex-hero .neex-section-title__eyebrow {
+  letter-spacing: 0.16em;
+  color: #a86860;
+}
+
+.studio-ag-page .neex-hero .neex-section-title__heading {
+  font-size: clamp(2.4rem, 5vw, 3.5rem);
+  letter-spacing: -0.025em;
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1.05;
+}
+
+.studio-ag-page .neex-hero .neex-section-title__description {
+  font-size: var(--font-size-lg);
+  max-width: 500px;
+  margin-inline: auto;
+  line-height: var(--line-height-relaxed);
+  color: #7a6b66;
+}
+
+/* SectionTitle — centered editorial axis */
+.studio-ag-page .neex-section-title {
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+  margin-bottom: var(--space-10);
+}
+
+.studio-ag-page .neex-section-title__eyebrow {
+  letter-spacing: 0.14em;
+}
+
+.studio-ag-page .neex-section-title__heading {
+  letter-spacing: -0.01em;
+}
+
+/* Cards — shadow-free, refined border */
+.studio-ag-page .neex-card {
+  background: #ffffff;
+  border: 1px solid #e8e0dc;
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  padding: var(--space-8);
+  max-width: none;
+}
+
+.studio-ag-page .neex-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(26, 18, 16, 0.07);
+  border-color: #d0c5c0;
+}
+
+/* Card grid — tighter, more editorial */
+.studio-ag-page .neex-card-grid {
+  gap: var(--space-4);
+}
+
+/* CTA section — clear base so dark panel controls the surface */
+.studio-ag-page .neex-cta-section {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.studio-ag-page .neex-cta-section .neex-section-title {
+  margin-bottom: 0;
+}
+
+.studio-ag-page .neex-cta-actions {
+  justify-content: center;
+}
+
+/* ── Section layout helpers ───────────────────────────────────── */
+
+.sag-section {
+  padding: var(--space-16) 0;
+}
+
+/* Barely-there off-white — not pink, just warm paper */
+.sag-section--subtle {
+  background-color: #f8f6f4;
+  margin-inline: calc(-1 * var(--space-6));
+  padding-inline: var(--space-6);
+  padding-block: var(--space-16);
+}
+
+/* ── About / AG Method ────────────────────────────────────────── */
+
+.sag-about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+/* Dark portrait placeholder — editorial depth, not decorative pink */
+.sag-about__image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(160deg, #211816 0%, #5c4240 55%, #8c6e6a 100%);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-6);
+  color: rgba(255 255 255 / 0.35);
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sag-about__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.sag-about__method-tag {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid #d8ceca;
+  border-radius: var(--radius-pill);
+  padding: 5px var(--space-4);
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  color: #a86860;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.sag-about__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.01em;
+  line-height: var(--line-height-tight);
+  color: #1a1210;
+  margin: 0;
+}
+
+.sag-about__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sag-about__body p {
+  margin: 0;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+  color: #7a6b66;
+}
+
+/* ── Services CTA nudge ───────────────────────────────────────── */
+
+.sag-services-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-10);
+}
+
+/* ── Before & After ───────────────────────────────────────────── */
+
+.sag-ba-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  margin-top: var(--space-10);
+}
+
+.sag-ba-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Single panel pair, no gap — a center rule divides them */
+.sag-ba-card__pair {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.sag-ba-card__before,
+.sag-ba-card__after {
+  aspect-ratio: 2 / 3;
+  position: relative;
+}
+
+/* Before: deep warm charcoal */
+.sag-ba-card__before {
+  background: linear-gradient(170deg, #1e1614 0%, #6b4e4a 100%);
+}
+
+/* After: warmed blush bloom */
+.sag-ba-card__after {
+  background: linear-gradient(170deg, #b08e88 0%, #e0ccc6 100%);
+}
+
+/* Pill divider centered on the seam */
+.sag-ba-card__divider {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background: #ffffff;
+  border-radius: var(--radius-pill);
+  padding: 3px var(--space-3);
+  font-size: 9px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1a1210;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(26, 18, 16, 0.15);
+}
+
+.sag-ba-card__panel-label {
+  position: absolute;
+  bottom: var(--space-3);
+  font-size: 9px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255 255 255 / 0.55);
+  pointer-events: none;
+}
+
+.sag-ba-card__panel-label--before {
+  left: var(--space-3);
+}
+
+.sag-ba-card__panel-label--after {
+  right: var(--space-3);
+}
+
+.sag-ba-card__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.02em;
+  color: #1a1210;
+  text-align: center;
+}
+
+/* ── Testimonials ─────────────────────────────────────────────── */
+
+.sag-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+
+.sag-testimonial {
+  background: #ffffff;
+  border: 1px solid #eae3df;
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Large typographic opening mark */
+.sag-testimonial__mark {
+  display: block;
+  font-size: 52px;
+  line-height: 0.85;
+  color: #e0d5d0;
+  font-family: Georgia, 'Times New Roman', serif;
+  margin-bottom: var(--space-3);
+  user-select: none;
+}
+
+.sag-testimonial__quote {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+  color: #2a1e1b;
+  font-style: italic;
+  margin: 0;
+  flex: 1;
+}
+
+.sag-testimonial__author {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid #f0e9e6;
+}
+
+.sag-testimonial__name {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  color: #1a1210;
+  letter-spacing: 0.01em;
+}
+
+.sag-testimonial__service {
+  font-size: var(--font-size-xs);
+  color: #a86860;
+  letter-spacing: 0.04em;
+}
+
+/* ── FAQ ──────────────────────────────────────────────────────── */
+
+.sag-faq-list {
+  list-style: none;
+  margin: var(--space-10) auto 0;
+  padding: 0;
+  max-width: 680px;
+}
+
+/* Divider-line style — no card, just editorial ruled rows */
+.sag-faq-item {
+  padding: var(--space-6) 0;
+  border-top: 1px solid #e8e0dc;
+}
+
+.sag-faq-item:last-child {
+  border-bottom: 1px solid #e8e0dc;
+}
+
+.sag-faq-item__question {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: #1a1210;
+  letter-spacing: 0.01em;
+  margin: 0 0 var(--space-3);
+}
+
+.sag-faq-item__answer {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+  color: #7a6b66;
+  margin: 0;
+}
+
+/* ── Booking CTA — dark panel ─────────────────────────────────── */
+
+.sag-booking-panel {
+  background: #1c1210;
+  border-radius: var(--radius-lg);
+  padding: var(--space-16) var(--space-12);
+  display: flex;
+  justify-content: center;
+
+  /* Local token overrides for this dark surface */
+  --color-text-primary: #f5edea;
+  --color-text-secondary: #a89088;
+  --color-brand-secondary: #c4aeaa;
+}
+
+/* Cream button on dark — strong, premium contrast */
+.sag-booking-panel .neex-button--primary {
+  background: #f5edea;
+  color: #1c1210;
+}
+
+.sag-booking-panel .neex-button--primary:hover {
+  background: #ffffff;
+  color: #1c1210;
+}
+
+.sag-booking-panel .neex-button--ghost {
+  color: rgba(245 237 234 / 0.75);
+  border-color: rgba(245 237 234 / 0.25);
+  box-shadow: none;
+}
+
+.sag-booking-panel .neex-button--ghost:hover {
+  background: rgba(245 237 234 / 0.06);
+  color: #f5edea;
+}
+
+/* ── Footer ───────────────────────────────────────────────────── */
+
+.sag-footer {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-12);
+  margin-top: var(--space-4);
+  border-top: 1px solid #e8e0dc;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: var(--space-16);
+}
+
+.sag-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sag-footer__logo {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: #1a1210;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sag-footer__tagline {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  color: #7a6b66;
+  margin: 0;
+}
+
+.sag-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.sag-footer__col-title {
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a86860;
+}
+
+.sag-footer__contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sag-footer__contact-list li {
+  font-size: var(--font-size-sm);
+  color: #7a6b66;
+  line-height: var(--line-height-normal);
+}
+
+.sag-footer__link {
+  color: #7a6b66;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sag-footer__link:hover {
+  color: #1a1210;
+}
+
+.sag-footer__copyright {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-top: var(--space-8);
+  border-top: 1px solid #f0e9e6;
+  font-size: var(--font-size-xs);
+  color: #b0a09c;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .studio-ag-page .neex-hero {
+    padding: var(--space-16) 0 var(--space-10);
+  }
+
+  .sag-about {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .sag-ba-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sag-testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sag-booking-panel {
+    padding: var(--space-12) var(--space-8);
+  }
+
+  .sag-footer {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .sag-footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .studio-ag-page .neex-hero .neex-section-title__heading {
+    font-size: 2rem;
+  }
+
+  .sag-ba-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sag-testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sag-booking-panel {
+    padding: var(--space-10) var(--space-6);
+  }
+
+  .sag-footer {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .sag-footer__brand,
+  .sag-footer__copyright {
+    grid-column: 1;
+  }
+}

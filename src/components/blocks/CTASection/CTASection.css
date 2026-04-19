@@ -1,0 +1,26 @@
+.neex-cta-section {
+  padding: var(--space-10);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.neex-cta-section__title {
+  margin-bottom: 0;
+}
+
+.neex-cta-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .neex-cta-section {
+    padding: var(--space-8);
+  }
+}

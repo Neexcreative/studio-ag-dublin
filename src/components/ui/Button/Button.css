@@ -1,0 +1,81 @@
+.neex-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.neex-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.neex-button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.neex-button:focus-visible {
+  outline: none;
+  box-shadow:
+    var(--shadow-md),
+    0 0 0 4px rgba(68, 0, 0, 0.12);
+}
+
+.neex-button:disabled,
+.neex-button[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.56;
+  transform: none;
+  box-shadow: none;
+}
+
+.neex-button--primary {
+  background: var(--color-brand-primary);
+  color: var(--color-text-inverse);
+}
+
+.neex-button--primary:hover {
+  background: var(--color-brand-secondary);
+}
+
+.neex-button--secondary {
+  background: var(--color-neutral-dark);
+  color: var(--color-text-inverse);
+}
+
+.neex-button--secondary:hover {
+  background: var(--color-neutral-gray);
+}
+
+.neex-button--ghost {
+  background: transparent;
+  color: var(--color-brand-primary);
+  border: 1px solid var(--color-brand-primary);
+  box-shadow: none;
+}
+
+.neex-button--ghost:hover {
+  background: rgba(68, 0, 0, 0.05);
+}
+
+.neex-button--full {
+  width: 100%;
+}

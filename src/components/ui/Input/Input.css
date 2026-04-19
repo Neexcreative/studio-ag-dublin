@@ -1,0 +1,58 @@
+.neex-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.neex-field__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.neex-field__required {
+  color: var(--color-brand-secondary);
+}
+
+.neex-field__hint {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+}
+
+.neex-field__hint--error {
+  color: var(--color-error);
+}
+
+.neex-input,
+.neex-select,
+.neex-textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid rgba(20, 20, 20, 0.16);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+  font-family: var(--font-family-primary);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.neex-input:focus,
+.neex-select:focus,
+.neex-textarea:focus {
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 4px rgba(68, 0, 0, 0.08);
+}
+
+.neex-input:disabled,
+.neex-select:disabled,
+.neex-textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.64;
+}

@@ -1,0 +1,13 @@
+.neex-landing-page {
+  min-height: 100vh;
+  padding: 88px 0;
+  background:
+    radial-gradient(circle at top left, rgba(107, 0, 0, 0.08), transparent 30%),
+    linear-gradient(180deg, #edfdc5 0%, #f4f7ea 100%);
+}
+
+@media (max-width: 768px) {
+  .neex-landing-page {
+    padding: 48px 0;
+  }
+}

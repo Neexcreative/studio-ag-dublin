@@ -1,0 +1,38 @@
+.neex-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-neutral-white);
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.neex-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.neex-card__eyebrow {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brand-secondary);
+}
+
+.neex-card__title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--space-6);
+  line-height: 1.15;
+  color: var(--color-text-primary);
+}
+
+.neex-card__description {
+  margin: 0;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+}
