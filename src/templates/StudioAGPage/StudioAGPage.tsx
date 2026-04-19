@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './StudioAGPage.css'
 import {
   STUDIO_AG_FRESHA_URL,
@@ -8,6 +8,7 @@ import {
   studioAgCta,
   studioAgFaq,
   studioAgHero,
+  studioAgServiceDetails,
   studioAgServices,
   studioAgTestimonials,
 } from './studioAgData'
@@ -121,48 +122,146 @@ function AGAboutSection() {
   )
 }
 
-// ── Services ────────────────────────────────────────────────────
+// ── Service Modal ────────────────────────────────────────────────
 
-function AGServicesSection() {
+interface ServiceModalItem {
+  eyebrow?: string
+  title: string
+  description?: string
+}
+
+interface AGServiceModalProps {
+  service: ServiceModalItem
+  detail: { paragraphs: string[] }
+  onClose: () => void
+}
+
+function AGServiceModal({ service, detail, onClose }: AGServiceModalProps) {
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
+    }
+  }, [onClose])
+
   return (
-    <section id="services" className="sag-services-section">
-      <div className="sag-services">
-        <div className="sag-services__header">
-          <span className="sag-eyebrow">{studioAgServices.eyebrow}</span>
-          <h2 className="sag-services__title">{studioAgServices.title}</h2>
-        </div>
+    <div className="sag-modal-overlay" onClick={onClose}>
+      <div
+        className="sag-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label={service.title}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="sag-modal__close" onClick={onClose} aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
 
-        <div className="sag-services__body">
-          <ul className="sag-service-list">
-            {studioAgServices.items.map(({ title, description }, i) => (
-              <li key={title} className="sag-service-item">
-                <span className="sag-service-item__num">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <div className="sag-service-item__content">
-                  <h3 className="sag-service-item__title">{title}</h3>
-                  <p className="sag-service-item__desc">{description}</p>
-                </div>
-                <span className="sag-service-item__arrow" aria-hidden="true">
-                  →
-                </span>
-              </li>
-            ))}
-          </ul>
+        <div className="sag-modal__inner">
+          {/* Left — editorial image grid */}
+          <div className="sag-modal__left" aria-hidden="true">
+            <div className="sag-modal-img-grid">
+              <div className="sag-modal-img sag-modal-img--1" />
+              <div className="sag-modal-img sag-modal-img--2" />
+              <div className="sag-modal-img sag-modal-img--3" />
+              <div className="sag-modal-img sag-modal-img--4" />
+              <div className="sag-modal-img sag-modal-img--5" />
+            </div>
+          </div>
 
-          <div className="sag-services__footer">
+          {/* Right — content */}
+          <div className="sag-modal__right">
+            <span className="sag-eyebrow">{service.eyebrow ?? 'Treatment'}</span>
+            <h3 className="sag-modal__title">{service.title}</h3>
+            <div className="sag-modal__rule" aria-hidden="true" />
+            <div className="sag-modal__body">
+              {detail.paragraphs.map((p) => (
+                <p key={p.slice(0, 28)}>{p}</p>
+              ))}
+            </div>
             <a
-              className="sag-services__menu-link"
+              className="sag-modal__cta"
               href={STUDIO_AG_FRESHA_URL}
               target="_blank"
               rel="noreferrer"
             >
-              View Full Treatment Menu on Fresha
+              Book This Treatment
             </a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  )
+}
+
+// ── Services ────────────────────────────────────────────────────
+
+function AGServicesSection() {
+  const [activeModal, setActiveModal] = useState<number | null>(null)
+
+  const activeService = activeModal !== null ? studioAgServices.items[activeModal] : null
+  const activeDetail = activeService ? studioAgServiceDetails[activeService.title] : null
+
+  return (
+    <>
+      <section id="services" className="sag-services-section">
+        <div className="sag-services">
+          <div className="sag-services__header">
+            <span className="sag-eyebrow">{studioAgServices.eyebrow}</span>
+            <h2 className="sag-services__title">{studioAgServices.title}</h2>
+          </div>
+
+          <div className="sag-services__body">
+            <ul className="sag-service-list">
+              {studioAgServices.items.map(({ title, description }, i) => (
+                <li key={title} className="sag-service-item">
+                  <button
+                    className="sag-service-item__btn"
+                    onClick={() => setActiveModal(i)}
+                    aria-haspopup="dialog"
+                  >
+                    <span className="sag-service-item__num">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div className="sag-service-item__content">
+                      <h3 className="sag-service-item__title">{title}</h3>
+                      <p className="sag-service-item__desc">{description}</p>
+                    </div>
+                    <span className="sag-service-item__arrow" aria-hidden="true">
+                      →
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+
+            <div className="sag-services__footer">
+              <a
+                className="sag-services__menu-link"
+                href={STUDIO_AG_FRESHA_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                View Full Treatment Menu on Fresha
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {activeService && activeDetail && (
+        <AGServiceModal
+          service={activeService}
+          detail={activeDetail}
+          onClose={() => setActiveModal(null)}
+        />
+      )}
+    </>
   )
 }
 
