@@ -1,14 +1,5 @@
+import { useState } from 'react'
 import './StudioAGPage.css'
-import {
-  Button,
-  CTASection,
-  Container,
-  FeaturesSection,
-  Hero,
-  Section,
-  SectionTitle,
-  ServicesSection,
-} from '../../components'
 import {
   STUDIO_AG_FRESHA_URL,
   studioAgAbout,
@@ -16,27 +7,76 @@ import {
   studioAgContact,
   studioAgCta,
   studioAgFaq,
-  studioAgFeatures,
   studioAgHero,
   studioAgServices,
   studioAgTestimonials,
 } from './studioAgData'
 
-// ── Page-local sections ─────────────────────────────────────────
-// These are not shared blocks. They live only inside this template.
+// ── Navbar ──────────────────────────────────────────────────────
 
-function AGAboutSection() {
+function AGNavbar() {
   return (
-    <section id="about" className="sag-section">
-      <div className="sag-about">
-        <div className="sag-about__image">Arieli Garcia — Placeholder</div>
-        <div className="sag-about__content">
-          <span className="sag-about__method-tag">{studioAgAbout.tag}</span>
-          <h2 className="sag-about__title">{studioAgAbout.title}</h2>
-          <div className="sag-about__body">
-            {studioAgAbout.paragraphs.map((p) => (
-              <p key={p.slice(0, 32)}>{p}</p>
-            ))}
+    <header className="sag-navbar">
+      <div className="sag-navbar__inner">
+        <a className="sag-navbar__brand" href="#hero">
+          Studio AG
+        </a>
+        <nav className="sag-navbar__nav" aria-label="Main navigation">
+          <a className="sag-navbar__link" href="#about">
+            About
+          </a>
+          <a className="sag-navbar__link" href="#services">
+            Treatments
+          </a>
+          <a className="sag-navbar__link" href="#booking">
+            Contact
+          </a>
+        </nav>
+        <a
+          className="sag-navbar__cta"
+          href={STUDIO_AG_FRESHA_URL}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Book Now
+        </a>
+      </div>
+    </header>
+  )
+}
+
+// ── Hero ────────────────────────────────────────────────────────
+
+function AGHeroSection() {
+  return (
+    <section id="hero" className="sag-hero">
+      <div className="sag-hero__layout">
+        <div className="sag-hero__content">
+          <span className="sag-eyebrow">{studioAgHero.eyebrow}</span>
+          <h1 className="sag-hero__title">{studioAgHero.title}</h1>
+          <p className="sag-hero__description">{studioAgHero.description}</p>
+          <div className="sag-hero__actions">
+            <a
+              className="sag-hero__cta-primary"
+              href={STUDIO_AG_FRESHA_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Book a Treatment
+            </a>
+            <a className="sag-hero__cta-ghost" href="#about">
+              The AG Method ↓
+            </a>
+          </div>
+        </div>
+
+        <div className="sag-hero__visual" aria-hidden="true">
+          <div className="sag-hero__image-frame">
+            <div className="sag-hero__image-placeholder" />
+          </div>
+          <div className="sag-hero__floating-tag">
+            <span className="sag-hero__tag-label">The AG Method</span>
+            <span className="sag-hero__tag-sub">Crafted in Dublin</span>
           </div>
         </div>
       </div>
@@ -44,147 +84,343 @@ function AGAboutSection() {
   )
 }
 
+// ── About / AG Method ───────────────────────────────────────────
+
+function AGAboutSection() {
+  return (
+    <section id="about" className="sag-about-section">
+      <div className="sag-about">
+        <div className="sag-about__visual">
+          <div className="sag-about__image" aria-hidden="true" />
+          <div className="sag-about__caption">
+            <span className="sag-about__caption-name">Arieli Garcia</span>
+            <span className="sag-about__caption-role">Founder &amp; Specialist</span>
+          </div>
+        </div>
+
+        <div className="sag-about__content">
+          <span className="sag-eyebrow">{studioAgAbout.tag}</span>
+          <h2 className="sag-about__title">{studioAgAbout.title}</h2>
+          <div className="sag-about__rule" />
+          <div className="sag-about__body">
+            {studioAgAbout.paragraphs.map((p) => (
+              <p key={p.slice(0, 32)}>{p}</p>
+            ))}
+          </div>
+          <a
+            className="sag-about__link"
+            href={STUDIO_AG_FRESHA_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Reserve Your Appointment →
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ── Services ────────────────────────────────────────────────────
+
+function AGServicesSection() {
+  return (
+    <section id="services" className="sag-services-section">
+      <div className="sag-services">
+        <div className="sag-services__header">
+          <span className="sag-eyebrow">{studioAgServices.eyebrow}</span>
+          <h2 className="sag-services__title">{studioAgServices.title}</h2>
+        </div>
+
+        <div className="sag-services__body">
+          <ul className="sag-service-list">
+            {studioAgServices.items.map(({ title, description }, i) => (
+              <li key={title} className="sag-service-item">
+                <span className="sag-service-item__num">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="sag-service-item__content">
+                  <h3 className="sag-service-item__title">{title}</h3>
+                  <p className="sag-service-item__desc">{description}</p>
+                </div>
+                <span className="sag-service-item__arrow" aria-hidden="true">
+                  →
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="sag-services__footer">
+            <a
+              className="sag-services__menu-link"
+              href={STUDIO_AG_FRESHA_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View Full Treatment Menu on Fresha
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ── Before & After ──────────────────────────────────────────────
+
 function AGBeforeAfterSection() {
   return (
-    <section className="sag-section">
-      <SectionTitle
-        eyebrow="Results"
-        title="Before & After"
-        description="Real results from real clients. Photography updated regularly — placeholders shown here."
-      />
-      <div className="sag-ba-grid">
-        {studioAgBeforeAfter.map(({ label }) => (
-          <div key={label} className="sag-ba-card">
-            <div className="sag-ba-card__pair">
-              <div className="sag-ba-card__before">
-                <span className="sag-ba-card__panel-label sag-ba-card__panel-label--before">
-                  Before
-                </span>
+    <section className="sag-ba-section">
+      <div className="sag-ba-inner">
+        <div className="sag-ba-header">
+          <span className="sag-eyebrow">Results</span>
+          <h2 className="sag-ba-title">Before &amp; After</h2>
+          <p className="sag-ba-subtitle">
+            Real results from real clients. Photography updated regularly.
+          </p>
+        </div>
+
+        <div className="sag-ba-grid">
+          {studioAgBeforeAfter.map(({ label }) => (
+            <div key={label} className="sag-ba-card">
+              <div className="sag-ba-card__pair">
+                <div className="sag-ba-card__before">
+                  <span className="sag-ba-card__tag">Before</span>
+                </div>
+                <div className="sag-ba-card__after">
+                  <span className="sag-ba-card__tag sag-ba-card__tag--after">After</span>
+                </div>
+                <span className="sag-ba-card__divider">AG</span>
               </div>
-              <div className="sag-ba-card__after">
-                <span className="sag-ba-card__panel-label sag-ba-card__panel-label--after">
-                  After
-                </span>
-              </div>
-              <span className="sag-ba-card__divider">AG</span>
+              <p className="sag-ba-card__caption">{label}</p>
             </div>
-            <p className="sag-ba-card__label">{label}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )
 }
+
+// ── Testimonials — split panel with navigation ──────────────────
 
 function AGTestimonialsSection() {
+  const total = studioAgTestimonials.length
+  const [active, setActive] = useState(0)
+
+  const prev = () => setActive((i) => (i - 1 + total) % total)
+  const next = () => setActive((i) => (i + 1) % total)
+
+  const current = studioAgTestimonials[active]
+
   return (
-    <section className="sag-section sag-section--subtle">
-      <SectionTitle
-        eyebrow="Client Stories"
-        title="What Our Clients Say"
-        description="Honest words from women who have experienced the Studio AG difference."
-      />
-      <div className="sag-testimonials-grid">
-        {studioAgTestimonials.map(({ quote, name, service }) => (
-          <div key={name} className="sag-testimonial">
-            <span className="sag-testimonial__mark" aria-hidden="true">
-              &ldquo;
-            </span>
-            <p className="sag-testimonial__quote">{quote}</p>
-            <div className="sag-testimonial__author">
-              <span className="sag-testimonial__name">{name}</span>
-              <span className="sag-testimonial__service">{service}</span>
-            </div>
+    <section className="sag-testimonials-section">
+      <div className="sag-testimonials-split">
+
+        {/* Left — header + navigation */}
+        <div className="sag-testimonials-left">
+          <div className="sag-testimonials-left__text">
+            <span className="sag-eyebrow">Client Stories</span>
+            <h2 className="sag-testimonials-left__title">What Our Clients Say</h2>
+            <p className="sag-testimonials-left__sub">
+              Honest words from women who have experienced the Studio AG difference.
+            </p>
           </div>
-        ))}
+
+          <div className="sag-testimonials-nav">
+            <button
+              className="sag-testimonials-nav__btn"
+              onClick={prev}
+              aria-label="Previous testimonial"
+            >
+              ←
+            </button>
+            <span className="sag-testimonials-nav__count" aria-live="polite">
+              {String(active + 1).padStart(2, '0')}&thinsp;/&thinsp;{String(total).padStart(2, '0')}
+            </span>
+            <button
+              className="sag-testimonials-nav__btn"
+              onClick={next}
+              aria-label="Next testimonial"
+            >
+              →
+            </button>
+          </div>
+
+          <div className="sag-testimonials-dots" aria-hidden="true">
+            {studioAgTestimonials.map((_, i) => (
+              <button
+                key={i}
+                className={`sag-testimonials-dot${active === i ? ' sag-testimonials-dot--active' : ''}`}
+                onClick={() => setActive(i)}
+                tabIndex={-1}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Right — active testimonial card */}
+        <div className="sag-testimonials-right">
+          <article className="sag-tc" key={active}>
+            <header className="sag-tc__top">
+              <span className="sag-tc__stars" aria-label="5 stars">
+                {current.stars}
+              </span>
+            </header>
+
+            <div className="sag-tc__body">
+              <span className="sag-tc__mark" aria-hidden="true">&ldquo;</span>
+              <blockquote className="sag-tc__quote">{current.quote}</blockquote>
+            </div>
+
+            <footer className="sag-tc__footer">
+              <div className="sag-tc__avatar" aria-hidden="true" />
+              <div className="sag-tc__author">
+                <span className="sag-tc__name">{current.name}</span>
+                <span className="sag-tc__service">{current.service}</span>
+              </div>
+            </footer>
+          </article>
+        </div>
+
       </div>
     </section>
   )
 }
 
+// ── FAQ Accordion ───────────────────────────────────────────────
+
 function AGFAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
   return (
-    <section className="sag-section">
-      <SectionTitle
-        eyebrow="FAQ"
-        title="Frequently Asked Questions"
-        description="Everything you need to know before your first visit."
-      />
-      <ul className="sag-faq-list">
-        {studioAgFaq.map(({ question, answer }) => (
-          <li key={question} className="sag-faq-item">
-            <h3 className="sag-faq-item__question">{question}</h3>
-            <p className="sag-faq-item__answer">{answer}</p>
-          </li>
-        ))}
-      </ul>
+    <section className="sag-faq-section">
+      <div className="sag-faq">
+        <div className="sag-faq__header">
+          <span className="sag-eyebrow">FAQ</span>
+          <h2 className="sag-faq__title">Frequently Asked Questions</h2>
+        </div>
+
+        <ul className="sag-faq-list">
+          {studioAgFaq.map(({ question, answer }, i) => {
+            const isOpen = openIndex === i
+            return (
+              <li key={question} className="sag-faq-item">
+                <button
+                  className="sag-faq-item__trigger"
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                >
+                  <span className="sag-faq-item__question">{question}</span>
+                  <span className="sag-faq-item__icon" aria-hidden="true">
+                    {isOpen ? '−' : '+'}
+                  </span>
+                </button>
+                {isOpen && <p className="sag-faq-item__answer">{answer}</p>}
+              </li>
+            )
+          })}
+        </ul>
+      </div>
     </section>
   )
 }
+
+// ── Booking CTA ─────────────────────────────────────────────────
+
+function AGBookingSection() {
+  return (
+    <section id="booking" className="sag-booking">
+      <div className="sag-booking__content">
+        <span className="sag-booking__eyebrow">{studioAgCta.eyebrow}</span>
+        <h2 className="sag-booking__title">{studioAgCta.title}</h2>
+        <div className="sag-booking__rule" aria-hidden="true" />
+        <p className="sag-booking__description">{studioAgCta.description}</p>
+        <div className="sag-booking__actions">
+          <a
+            className="sag-booking__cta-primary"
+            href={STUDIO_AG_FRESHA_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Book on Fresha
+          </a>
+          <a className="sag-booking__cta-ghost" href="#services">
+            View Treatments
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ── Footer ──────────────────────────────────────────────────────
 
 function AGFooterSection() {
   const { address, phone, email, hours, instagram, fresha } = studioAgContact
+
   return (
     <footer className="sag-footer">
-      <div className="sag-footer__brand">
-        <div className="sag-footer__logo">Studio AG</div>
-        <p className="sag-footer__tagline">
-          Beauty with purpose.
-          <br />
-          Technique with precision.
-          <br />
-          Dublin&rsquo;s home of the AG Method.
+      <div className="sag-footer__inner">
+        <div className="sag-footer__brand">
+          <div className="sag-footer__logo">Studio AG</div>
+          <p className="sag-footer__tagline">
+            Beauty with purpose.
+            <br />
+            Technique with precision.
+            <br />
+            Dublin&rsquo;s home of the AG Method.
+          </p>
+        </div>
+
+        <div className="sag-footer__col">
+          <div className="sag-footer__col-title">Contact</div>
+          <ul className="sag-footer__list">
+            <li>{address}</li>
+            <li>
+              <a className="sag-footer__link" href={`tel:${phone.replace(/\s/g, '')}`}>
+                {phone}
+              </a>
+            </li>
+            <li>
+              <a className="sag-footer__link" href={`mailto:${email}`}>
+                {email}
+              </a>
+            </li>
+            <li>Open: {hours}</li>
+          </ul>
+        </div>
+
+        <div className="sag-footer__col">
+          <div className="sag-footer__col-title">Connect</div>
+          <ul className="sag-footer__list">
+            <li>
+              <a
+                className="sag-footer__link"
+                href={instagram}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Instagram @beautystudiooag
+              </a>
+            </li>
+            <li>
+              <a
+                className="sag-footer__link"
+                href={fresha}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Book on Fresha
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <p className="sag-footer__copyright">
+          &copy; {new Date().getFullYear()} Studio AG &middot; Arieli Garcia &middot; All
+          rights reserved.
         </p>
       </div>
-
-      <div className="sag-footer__col">
-        <div className="sag-footer__col-title">Contact</div>
-        <ul className="sag-footer__contact-list">
-          <li>{address}</li>
-          <li>
-            <a className="sag-footer__link" href={`tel:${phone.replace(/\s/g, '')}`}>
-              {phone}
-            </a>
-          </li>
-          <li>
-            <a className="sag-footer__link" href={`mailto:${email}`}>
-              {email}
-            </a>
-          </li>
-          <li>Open: {hours}</li>
-        </ul>
-      </div>
-
-      <div className="sag-footer__col">
-        <div className="sag-footer__col-title">Connect</div>
-        <ul className="sag-footer__contact-list">
-          <li>
-            <a
-              className="sag-footer__link"
-              href={instagram}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Instagram @beautystudiooag
-            </a>
-          </li>
-          <li>
-            <a
-              className="sag-footer__link"
-              href={fresha}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Book on Fresha
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <p className="sag-footer__copyright">
-        &copy; {new Date().getFullYear()} Studio AG &middot; Arieli Garcia &middot; All
-        rights reserved.
-      </p>
     </footer>
   )
 }
@@ -194,41 +430,15 @@ function AGFooterSection() {
 function StudioAGPage() {
   return (
     <div className="studio-ag-page">
-      <Container>
-        <Section id="hero">
-          <Hero {...studioAgHero} />
-        </Section>
-
-        <AGAboutSection />
-
-        <Section id="services">
-          <ServicesSection {...studioAgServices} />
-          <div className="sag-services-cta">
-            <Button href={STUDIO_AG_FRESHA_URL} variant="ghost" target="_blank">
-              View Treatment Menu on Fresha
-            </Button>
-          </div>
-        </Section>
-
-        <Section id="why-choose">
-          <FeaturesSection {...studioAgFeatures} />
-        </Section>
-
-        <AGBeforeAfterSection />
-
-        <AGTestimonialsSection />
-
-        <AGFAQSection />
-
-        {/* Dark booking panel — strong CTA before footer */}
-        <section id="booking" className="sag-section">
-          <div className="sag-booking-panel">
-            <CTASection {...studioAgCta} />
-          </div>
-        </section>
-
-        <AGFooterSection />
-      </Container>
+      <AGNavbar />
+      <AGHeroSection />
+      <AGAboutSection />
+      <AGServicesSection />
+      <AGBeforeAfterSection />
+      <AGTestimonialsSection />
+      <AGFAQSection />
+      <AGBookingSection />
+      <AGFooterSection />
     </div>
   )
 }
