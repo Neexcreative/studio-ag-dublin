@@ -73,7 +73,11 @@ function AGHeroSection() {
 
         <div className="sag-hero__visual" aria-hidden="true">
           <div className="sag-hero__image-frame">
-            <div className="sag-hero__image-placeholder" />
+            <img
+              src="/images/studio-ag/hero/hero.svg"
+              alt=""
+              className="sag-hero__img"
+            />
           </div>
           <div className="sag-hero__floating-tag">
             <span className="sag-hero__tag-label">The AG Method</span>
@@ -92,7 +96,11 @@ function AGAboutSection() {
     <section id="about" className="sag-about-section">
       <div className="sag-about">
         <div className="sag-about__visual">
-          <div className="sag-about__image" aria-hidden="true" />
+          <img
+            src="/images/studio-ag/about/arieli.svg"
+            alt=""
+            className="sag-about__image"
+          />
           <div className="sag-about__caption">
             <span className="sag-about__caption-name">Arieli Garcia</span>
             <span className="sag-about__caption-role">Founder &amp; Specialist</span>
@@ -121,6 +129,14 @@ function AGAboutSection() {
     </section>
   )
 }
+
+const MODAL_GRID_IMGS = [
+  '/images/studio-ag/services/grid-1.svg',
+  '/images/studio-ag/services/grid-2.svg',
+  '/images/studio-ag/services/grid-3.svg',
+  '/images/studio-ag/services/grid-4.svg',
+  '/images/studio-ag/services/grid-5.svg',
+]
 
 // ── Service Modal ────────────────────────────────────────────────
 
@@ -166,11 +182,14 @@ function AGServiceModal({ service, detail, onClose }: AGServiceModalProps) {
           {/* Left — editorial image grid */}
           <div className="sag-modal__left" aria-hidden="true">
             <div className="sag-modal-img-grid">
-              <div className="sag-modal-img sag-modal-img--1" />
-              <div className="sag-modal-img sag-modal-img--2" />
-              <div className="sag-modal-img sag-modal-img--3" />
-              <div className="sag-modal-img sag-modal-img--4" />
-              <div className="sag-modal-img sag-modal-img--5" />
+              {MODAL_GRID_IMGS.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt=""
+                  className={`sag-modal-img sag-modal-img--${i + 1}`}
+                />
+              ))}
             </div>
           </div>
 
@@ -280,13 +299,15 @@ function AGBeforeAfterSection() {
         </div>
 
         <div className="sag-ba-grid">
-          {studioAgBeforeAfter.map(({ label }) => (
+          {studioAgBeforeAfter.map(({ label, beforeImg, afterImg }) => (
             <div key={label} className="sag-ba-card">
               <div className="sag-ba-card__pair">
                 <div className="sag-ba-card__before">
+                  <img src={beforeImg} alt="" className="sag-ba-card__photo" />
                   <span className="sag-ba-card__tag">Before</span>
                 </div>
                 <div className="sag-ba-card__after">
+                  <img src={afterImg} alt="" className="sag-ba-card__photo" />
                   <span className="sag-ba-card__tag sag-ba-card__tag--after">After</span>
                 </div>
                 <span className="sag-ba-card__divider">AG</span>
@@ -372,7 +393,7 @@ function AGTestimonialsSection() {
             </div>
 
             <footer className="sag-tc__footer">
-              <div className="sag-tc__avatar" aria-hidden="true" />
+              <img src={current.avatar} alt="" className="sag-tc__avatar" />
               <div className="sag-tc__author">
                 <span className="sag-tc__name">{current.name}</span>
                 <span className="sag-tc__service">{current.service}</span>

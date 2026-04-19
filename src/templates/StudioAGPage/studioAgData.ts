@@ -125,9 +125,21 @@ export const studioAgAbout = {
 }
 
 export const studioAgBeforeAfter = [
-  { label: 'Brow Sculpting' },
-  { label: 'Facial Glow Treatment' },
-  { label: 'Lash Lift & Tint' },
+  {
+    label: 'Brow Sculpting',
+    beforeImg: '/images/studio-ag/before-after/brow-before.svg',
+    afterImg: '/images/studio-ag/before-after/brow-after.svg',
+  },
+  {
+    label: 'Facial Glow Treatment',
+    beforeImg: '/images/studio-ag/before-after/facial-before.svg',
+    afterImg: '/images/studio-ag/before-after/facial-after.svg',
+  },
+  {
+    label: 'Lash Lift & Tint',
+    beforeImg: '/images/studio-ag/before-after/lash-before.svg',
+    afterImg: '/images/studio-ag/before-after/lash-after.svg',
+  },
 ]
 
 export const studioAgTestimonials = [
@@ -137,6 +149,7 @@ export const studioAgTestimonials = [
       'Arieli completely transformed my brows. She took the time to understand my face and the result was better than I ever imagined. I will not go anywhere else.',
     name: 'Sarah M.',
     service: 'Eyebrow Sculpting',
+    avatar: '/images/studio-ag/testimonials/avatar-1.svg',
   },
   {
     stars: '★★★★★',
@@ -144,6 +157,7 @@ export const studioAgTestimonials = [
       'The facial I had at Studio AG was unlike any I have had before. My skin looked radiant for weeks. The studio itself is so calming and professional.',
     name: 'Ciara R.',
     service: 'Personalised Facial',
+    avatar: '/images/studio-ag/testimonials/avatar-2.svg',
   },
   {
     stars: '★★★★★',
@@ -151,6 +165,7 @@ export const studioAgTestimonials = [
       'I was nervous about waxing but Arieli made me feel completely at ease. Quick, precise, and virtually painless. Highly recommend to anyone in Dublin.',
     name: 'Aoife K.',
     service: 'Professional Waxing',
+    avatar: '/images/studio-ag/testimonials/avatar-3.svg',
   },
 ]
 
