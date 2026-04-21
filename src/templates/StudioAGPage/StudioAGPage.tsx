@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './StudioAGPage.css'
 import {
   STUDIO_AG_FRESHA_URL,
@@ -19,9 +19,13 @@ function AGNavbar() {
   return (
     <header className="sag-navbar">
       <div className="sag-navbar__inner">
-        <a className="sag-navbar__brand" href="#hero">
-          Studio AG
-        </a>
+        <a className="sag-navbar__brand" href="#hero" aria-label="Studio AG home">
+  <img
+    src="/images/studio-ag/logo/Logo.svg"
+    alt="Studio AG"
+    className="sag-navbar__logo"
+  />
+</a>
         <nav className="sag-navbar__nav" aria-label="Main navigation">
           <a className="sag-navbar__link" href="#about">
             About
@@ -74,7 +78,7 @@ function AGHeroSection() {
         <div className="sag-hero__visual" aria-hidden="true">
           <div className="sag-hero__image-frame">
             <img
-              src="/images/studio-ag/hero/hero.svg"
+              src="/images/studio-ag/hero/hero.png"
               alt=""
               className="sag-hero__img"
             />
@@ -97,7 +101,7 @@ function AGAboutSection() {
       <div className="sag-about">
         <div className="sag-about__visual">
           <img
-            src="/images/studio-ag/about/arieli.svg"
+            src="/images/studio-ag/about/arieli.png"
             alt=""
             className="sag-about__image"
           />
@@ -284,7 +288,75 @@ function AGServicesSection() {
   )
 }
 
-// ── Before & After ──────────────────────────────────────────────
+// ── Before & After slider ────────────────────────────────────────
+
+interface BASliderProps {
+  beforeImg: string
+  afterImg: string
+  label: string
+}
+
+function BASlider({ beforeImg, afterImg, label }: BASliderProps) {
+  const [pos, setPos] = useState(50)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const dragging = useRef(false)
+
+  const updatePos = (clientX: number) => {
+    if (!trackRef.current) return
+    const rect = trackRef.current.getBoundingClientRect()
+    const pct = Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100))
+    setPos(pct)
+  }
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    dragging.current = true
+    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+    updatePos(e.clientX)
+  }
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!dragging.current) return
+    updatePos(e.clientX)
+  }
+
+  const onPointerUp = () => {
+    dragging.current = false
+  }
+
+  return (
+    <div className="sag-slider">
+      <div
+        ref={trackRef}
+        className="sag-slider__track"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerLeave={onPointerUp}
+      >
+        <img src={beforeImg} alt="" className="sag-slider__before-img" draggable={false} />
+        <div
+          className="sag-slider__after-layer"
+          style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
+        >
+          <img src={afterImg} alt="" className="sag-slider__after-img" draggable={false} />
+        </div>
+
+        <div className="sag-slider__line" style={{ left: `${pos}%` }}>
+          <div className="sag-slider__handle" aria-hidden="true">
+            <svg className="sag-slider__handle-icon" viewBox="0 0 20 20" fill="none">
+              <path d="M8 5L5 10L8 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 5L15 10L12 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <span className="sag-slider__badge sag-slider__badge--before">Before</span>
+        <span className="sag-slider__badge sag-slider__badge--after">After</span>
+      </div>
+      <p className="sag-ba-card__caption">{label}</p>
+    </div>
+  )
+}
 
 function AGBeforeAfterSection() {
   return (
@@ -294,26 +366,13 @@ function AGBeforeAfterSection() {
           <span className="sag-eyebrow">Results</span>
           <h2 className="sag-ba-title">Before &amp; After</h2>
           <p className="sag-ba-subtitle">
-            Real results from real clients. Photography updated regularly.
+            Drag to compare. Real results from real clients.
           </p>
         </div>
 
         <div className="sag-ba-grid">
           {studioAgBeforeAfter.map(({ label, beforeImg, afterImg }) => (
-            <div key={label} className="sag-ba-card">
-              <div className="sag-ba-card__pair">
-                <div className="sag-ba-card__before">
-                  <img src={beforeImg} alt="" className="sag-ba-card__photo" />
-                  <span className="sag-ba-card__tag">Before</span>
-                </div>
-                <div className="sag-ba-card__after">
-                  <img src={afterImg} alt="" className="sag-ba-card__photo" />
-                  <span className="sag-ba-card__tag sag-ba-card__tag--after">After</span>
-                </div>
-                <span className="sag-ba-card__divider">AG</span>
-              </div>
-              <p className="sag-ba-card__caption">{label}</p>
-            </div>
+            <BASlider key={label} beforeImg={beforeImg} afterImg={afterImg} label={label} />
           ))}
         </div>
       </div>
@@ -323,9 +382,19 @@ function AGBeforeAfterSection() {
 
 // ── Testimonials — split panel with navigation ──────────────────
 
+const TESTIMONIAL_INTERVAL_MS = 5500
+
 function AGTestimonialsSection() {
   const total = studioAgTestimonials.length
   const [active, setActive] = useState(0)
+
+  useEffect(() => {
+    const timer = setTimeout(
+      () => setActive((i) => (i + 1) % total),
+      TESTIMONIAL_INTERVAL_MS,
+    )
+    return () => clearTimeout(timer)
+  }, [active, total])
 
   const prev = () => setActive((i) => (i - 1 + total) % total)
   const next = () => setActive((i) => (i + 1) % total)
@@ -373,7 +442,11 @@ function AGTestimonialsSection() {
                 className={`sag-testimonials-dot${active === i ? ' sag-testimonials-dot--active' : ''}`}
                 onClick={() => setActive(i)}
                 tabIndex={-1}
-              />
+              >
+                {active === i && (
+                  <span key={active} className="sag-testimonials-dot__progress" />
+                )}
+              </button>
             ))}
           </div>
         </div>
@@ -538,7 +611,7 @@ function AGFooterSection() {
 
         <p className="sag-footer__copyright">
           &copy; {new Date().getFullYear()} Studio AG &middot; Arieli Garcia &middot; All
-          rights reserved.
+          rights reserved. By Neex Creative
         </p>
       </div>
     </footer>
