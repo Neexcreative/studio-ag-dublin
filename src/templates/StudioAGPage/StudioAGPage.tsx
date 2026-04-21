@@ -13,6 +13,8 @@ import {
   studioAgTestimonials,
 } from './studioAgData'
 
+const STUDIO_AG_WHATSAPP_URL = 'https://wa.me/353894358389'
+
 // ── Navbar ──────────────────────────────────────────────────────
 
 function AGNavbar() {
@@ -69,8 +71,13 @@ function AGHeroSection() {
             >
               Book a Treatment
             </a>
-            <a className="sag-hero__cta-ghost" href="#about">
-              The AG Method ↓
+            <a
+              className="sag-hero__cta-secondary"
+              href={STUDIO_AG_WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Chat on WhatsApp
             </a>
           </div>
         </div>
@@ -537,8 +544,13 @@ function AGBookingSection() {
           >
             Book on Fresha
           </a>
-          <a className="sag-booking__cta-ghost" href="#services">
-            View Treatments
+          <a
+            className="sag-booking__cta-secondary"
+            href={STUDIO_AG_WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Chat on WhatsApp
           </a>
         </div>
       </div>
