@@ -23,7 +23,7 @@ function AGNavbar() {
       <div className="sag-navbar__inner">
         <a className="sag-navbar__brand" href="#hero" aria-label="Studio AG home">
   <img
-    src="/images/studio-ag/logo/Logo.svg"
+    src="/images/studio-ag/logo/logo.svg"
     alt="Studio AG"
     className="sag-navbar__logo"
   />
