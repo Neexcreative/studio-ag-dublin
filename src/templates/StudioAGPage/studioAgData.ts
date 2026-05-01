@@ -57,7 +57,7 @@ export const studioAgCta: CTASectionProps = {
   eyebrow: 'Reservations',
   title: 'Secure Your Appointment',
   description:
-    'Book directly through Fresha — available 24/7. Studio AG appointments are in high demand. Reserve your spot today.',
+    'Book directly through Fresha available 24/7. Studio AG appointments are in high demand. Reserve your spot today.',
 }
 
 export const studioAgAbout = {
@@ -72,19 +72,19 @@ export const studioAgAbout = {
 
 export const studioAgBeforeAfter = [
   {
-    label: 'Brow Sculpting',
-    beforeImg: '/images/studio-ag/before-after/brow-before.svg',
-    afterImg: '/images/studio-ag/before-after/brow-after.svg',
+    label: 'Body Sculpting',
+    beforeImg: '/images/studio-ag/before-after/brow-before.png',
+    afterImg: '/images/studio-ag/before-after/brow-after.png',
   },
   {
-    label: 'Facial Glow Treatment',
-    beforeImg: '/images/studio-ag/before-after/facial-before.svg',
-    afterImg: '/images/studio-ag/before-after/facial-after.svg',
+    label: 'Post Operative',
+    beforeImg: '/images/studio-ag/before-after/facial-before.png',
+    afterImg: '/images/studio-ag/before-after/facial-after.png',
   },
   {
-    label: 'Lash Lift & Tint',
-    beforeImg: '/images/studio-ag/before-after/lash-before.svg',
-    afterImg: '/images/studio-ag/before-after/lash-after.svg',
+    label: 'Lymphatic Dreinage AG Method',
+    beforeImg: '/images/studio-ag/before-after/lash-before.png',
+    afterImg: '/images/studio-ag/before-after/lash-after.png',
   },
 ]
 
@@ -150,22 +150,22 @@ export const studioAgContact = {
 export const studioAgServiceDetails: Record<string, { paragraphs: string[] }> = {
   'Body Treatment': {
     paragraphs: [
-      'Studio AG body treatments are designed to restore tone, improve circulation, and leave your skin feeling deeply nourished. Each session is personalised to your individual concern — whether that is post-event recovery, ongoing wellness, or a visible improvement in skin quality and contour.',
-      'Using only professional-grade formulations, Arieli applies a combination of targeted techniques to work with your body\'s natural form. The experience is unhurried, precise, and deeply restorative — equal parts therapeutic and aesthetic.',
+      'Studio AG body treatments are designed to restore tone, improve circulation, and leave your skin feeling deeply nourished. Each session is personalised to your individual concern whether that is post-event recovery, ongoing wellness, or a visible improvement in skin quality and contour.',
+      'Using only professional-grade formulations, Arieli applies a combination of targeted techniques to work with your body\'s natural form. The experience is unhurried, precise, and deeply restorative equal parts therapeutic and aesthetic.',
       'Treatments are available as standalone sessions or as part of a curated programme. Whether you are preparing for a special occasion or building a consistent self-care routine, Studio AG body treatments deliver results you can see and feel.',
     ],
   },
   'Facials & Skincare': {
     paragraphs: [
-      'Every facial at Studio AG begins with a thorough skin assessment. No two complexions are the same, and Arieli\'s approach reflects that — each treatment is tailored to your specific skin type, concern, and goal, from deep hydration and luminosity to targeted clarifying and anti-ageing protocols.',
-      'Drawing on advanced professional techniques and carefully selected premium skincare formulations, a Studio AG facial is not a standard high-street treatment. It is a clinical-grade experience delivered with warmth and precision — designed to produce results that are visible long after you leave the studio.',
+      'Every facial at Studio AG begins with a thorough skin assessment. No two complexions are the same, and Arieli\'s approach reflects that each treatment is tailored to your specific skin type, concern, and goal, from deep hydration and luminosity to targeted clarifying and anti-ageing protocols.',
+      'Drawing on advanced professional techniques and carefully selected premium skincare formulations, a Studio AG facial is not a standard high-street treatment. It is a clinical-grade experience delivered with warmth and precision designed to produce results that are visible long after you leave the studio.',
       'Regular facial programmes are available for clients looking to maintain consistent, long-term skin health. Arieli will guide you on frequency and home-care recommendations to support and extend your in-studio results between appointments.',
     ],
   },
   'Waxing': {
     paragraphs: [
       'Studio AG offers professional waxing services using high-performance formulations selected for their efficacy and gentleness on the skin. Arieli\'s technique is precise, swift, and designed to minimise discomfort without compromising on the quality or longevity of results.',
-      'Every waxing session begins with careful skin preparation and concludes with a soothing post-treatment application to calm and protect. The result is smooth, long-lasting, and professionally finished — nothing rushed, nothing clinical.',
+      'Every waxing session begins with careful skin preparation and concludes with a soothing post-treatment application to calm and protect. The result is smooth, long-lasting, and professionally finished nothing rushed, nothing clinical.',
       'From small targeted areas to full treatments, waxing at Studio AG is carried out with full professionalism and meticulous attention to detail. The studio is private, immaculately clean, and designed to put you entirely at ease throughout the process.',
     ],
   },
@@ -178,9 +178,9 @@ export const studioAgServiceDetails: Record<string, { paragraphs: string[] }> = 
   },
   'Eyebrows & Eyelashes': {
     paragraphs: [
-      'Brow architecture and lash work are among the most transformative treatments available at Studio AG. Arieli\'s approach is structural — she works with your natural bone structure and facial features to create results that frame and enhance rather than overpower.',
+      'Brow architecture and lash work are among the most transformative treatments available at Studio AG. Arieli\'s approach is structural she works with your natural bone structure and facial features to create results that frame and enhance rather than overpower.',
       'Eyebrow shaping at Studio AG is precise, thoughtful, and tailored to your face. Whether your preference is sculpted and defined, naturally soft, or something in between, each shape is designed specifically for you. Lash treatments, including lifts and tints, are applied with equal care and professional-grade products.',
-      'These are finishing treatments that make a significant visible difference — clients frequently note how much more defined, open, and expressive their features look after even a single appointment. Ideal for regular maintenance and special occasion preparation alike.',
+      'These are finishing treatments that make a significant visible difference clients frequently note how much more defined, open, and expressive their features look after even a single appointment. Ideal for regular maintenance and special occasion preparation alike.',
     ],
   },
 }
