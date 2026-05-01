@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
-
 /* ═══════════════════════════════════════════════════════════════
+   Font loaded via <link> in index.html for better performance.
    StudioAGPage — premium redesign. All rules scoped to
    .studio-ag-page or .sag-* classes. Global NEEX system untouched.
    ═══════════════════════════════════════════════════════════════ */
@@ -131,6 +130,69 @@
 
 .sag-navbar__cta:hover {
   background: var(--sag-brand);
+}
+
+/* Hamburger toggle — mobile only */
+.sag-navbar__hamburger {
+  display: none;
+  margin-left: auto;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  flex-shrink: 0;
+}
+
+.sag-navbar__hamburger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--sag-ink);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.sag-navbar__hamburger--open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.sag-navbar__hamburger--open span:nth-child(2) {
+  opacity: 0;
+}
+
+.sag-navbar__hamburger--open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile nav panel — revealed by JS state */
+.sag-navbar__mobile-nav {
+  border-top: 1px solid var(--sag-border-light);
+  background: rgba(250, 249, 247, 0.98);
+  padding: var(--space-2) var(--space-6) var(--space-4);
+  display: flex;
+  flex-direction: column;
+}
+
+.sag-navbar__mobile-link {
+  font-size: var(--font-size-md);
+  color: var(--sag-ink);
+  text-decoration: none;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--sag-border-light);
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
+}
+
+.sag-navbar__mobile-link:last-child {
+  border-bottom: none;
+}
+
+.sag-navbar__mobile-link:hover {
+  color: var(--sag-brand);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -829,10 +891,6 @@
 
 /* ── Right panel — active card ──────────────────────────────── */
 
-.sag-testimonials-right {
-  /* card fills this column */
-}
-
 /* .sag-tc = testimonial card (scoped shorthand) */
 .sag-tc {
   background: var(--sag-white);
@@ -850,10 +908,6 @@
 @keyframes sag-tc-enter {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-
-.sag-tc__top {
-  /* stars row */
 }
 
 .sag-tc__stars {
@@ -883,7 +937,7 @@
   line-height: 1.78;
   color: var(--sag-ink);
   font-style: italic;
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-regular);
   letter-spacing: 0.01em;
   margin: 0;
 }
@@ -996,7 +1050,7 @@
 
 .sag-faq-item__icon {
   font-size: 20px;
-  font-weight: var(--font-weight-light);
+  font-weight: 300;
   color: var(--sag-brand);
   line-height: 1;
   flex-shrink: 0;
@@ -1168,11 +1222,11 @@
 }
 
 .sag-footer__logo {
-  font-size: 12px;
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--sag-ink);
+  display: block;
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  align-self: flex-start;
 }
 
 .sag-footer__tagline {
@@ -1262,6 +1316,7 @@
   max-width: 1020px;
   max-height: 88vh;
   overflow-y: auto;
+  overscroll-behavior: contain;
   position: relative;
   animation: sag-modal-in 0.28s ease both;
   box-shadow: 0 32px 100px rgba(20, 14, 12, 0.36);
@@ -1425,9 +1480,17 @@
    ═══════════════════════════════════════════════════════════════ */
 
 @media (max-width: 900px) {
-  /* Navbar — hide links, keep brand + CTA */
+  /* Navbar — hide desktop links, show hamburger */
   .sag-navbar__nav {
     display: none;
+  }
+
+  .sag-navbar__hamburger {
+    display: flex;
+  }
+
+  .sag-navbar__cta {
+    margin-left: var(--space-3);
   }
 
   /* Hero — stack, hide visual */

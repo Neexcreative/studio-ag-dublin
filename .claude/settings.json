@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"g:/trabalhos diversos/Neex Creative 2025-26/Design System/studio-ag-dublin\" log --oneline -5)",
+      "Bash(git -C \"g:/trabalhos diversos/Neex Creative 2025-26/Design System/studio-ag-dublin\" add src/templates/StudioAGPage/StudioAGPage.css src/templates/StudioAGPage/StudioAGPage.tsx src/templates/StudioAGPage/studioAgData.ts index.html public/images/studio-ag/logo/logo.svg src/App.css src/assets/react.svg src/assets/vite.svg vercel.json)"
+    ]
+  }
+}

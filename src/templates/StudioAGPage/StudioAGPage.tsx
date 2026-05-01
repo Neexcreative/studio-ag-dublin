@@ -18,27 +18,34 @@ const STUDIO_AG_WHATSAPP_URL = 'https://wa.me/353894358389'
 // ── Navbar ──────────────────────────────────────────────────────
 
 function AGNavbar() {
+  const [navOpen, setNavOpen] = useState(false)
+  const close = () => setNavOpen(false)
+
   return (
     <header className="sag-navbar">
       <div className="sag-navbar__inner">
         <a className="sag-navbar__brand" href="#hero" aria-label="Studio AG home">
-  <img
-    src="/images/studio-ag/logo/logo.svg"
-    alt="Studio AG"
-    className="sag-navbar__logo"
-  />
-</a>
+          <img
+            src="/images/studio-ag/logo/logo.svg"
+            alt="Studio AG"
+            className="sag-navbar__logo"
+          />
+        </a>
         <nav className="sag-navbar__nav" aria-label="Main navigation">
-          <a className="sag-navbar__link" href="#about">
-            About
-          </a>
-          <a className="sag-navbar__link" href="#services">
-            Treatments
-          </a>
-          <a className="sag-navbar__link" href="#booking">
-            Contact
-          </a>
+          <a className="sag-navbar__link" href="#about">About</a>
+          <a className="sag-navbar__link" href="#services">Treatments</a>
+          <a className="sag-navbar__link" href="#booking">Contact</a>
         </nav>
+        <button
+          className={`sag-navbar__hamburger${navOpen ? ' sag-navbar__hamburger--open' : ''}`}
+          onClick={() => setNavOpen((o) => !o)}
+          aria-label={navOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={navOpen}
+        >
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </button>
         <a
           className="sag-navbar__cta"
           href={STUDIO_AG_FRESHA_URL}
@@ -48,6 +55,13 @@ function AGNavbar() {
           Book Now
         </a>
       </div>
+      {navOpen && (
+        <nav className="sag-navbar__mobile-nav" aria-label="Mobile navigation">
+          <a className="sag-navbar__mobile-link" href="#about" onClick={close}>About</a>
+          <a className="sag-navbar__mobile-link" href="#services" onClick={close}>Treatments</a>
+          <a className="sag-navbar__mobile-link" href="#booking" onClick={close}>Contact</a>
+        </nav>
+      )}
     </header>
   )
 }
@@ -87,6 +101,8 @@ function AGHeroSection() {
             <img
               src="/images/studio-ag/hero/hero.png"
               alt=""
+              width="600"
+              height="800"
               className="sag-hero__img"
             />
           </div>
@@ -110,6 +126,9 @@ function AGAboutSection() {
           <img
             src="/images/studio-ag/about/arieli.png"
             alt=""
+            width="480"
+            height="640"
+            loading="lazy"
             className="sag-about__image"
           />
           <div className="sag-about__caption">
@@ -123,8 +142,8 @@ function AGAboutSection() {
           <h2 className="sag-about__title">{studioAgAbout.title}</h2>
           <div className="sag-about__rule" />
           <div className="sag-about__body">
-            {studioAgAbout.paragraphs.map((p) => (
-              <p key={p.slice(0, 32)}>{p}</p>
+            {studioAgAbout.paragraphs.map((p, i) => (
+              <p key={i}>{p}</p>
             ))}
           </div>
           <a
@@ -164,28 +183,61 @@ interface AGServiceModalProps {
 }
 
 function AGServiceModal({ service, detail, onClose }: AGServiceModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+
   useEffect(() => {
+    const previousFocus = document.activeElement as HTMLElement | null
+    closeRef.current?.focus()
+
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusable = Array.from(
+          modalRef.current.querySelectorAll<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((el) => !el.hasAttribute('disabled'))
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault()
+            last.focus()
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault()
+            first.focus()
+          }
+        }
+      }
     }
+
     document.addEventListener('keydown', handleKey)
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', handleKey)
       document.body.style.overflow = ''
+      previousFocus?.focus()
     }
   }, [onClose])
 
   return (
     <div className="sag-modal-overlay" onClick={onClose}>
       <div
+        ref={modalRef}
         className="sag-modal"
         role="dialog"
         aria-modal="true"
-        aria-label={service.title}
+        aria-labelledby="sag-modal-title"
         onClick={(e) => e.stopPropagation()}
       >
-        <button className="sag-modal__close" onClick={onClose} aria-label="Close">
+        <button ref={closeRef} className="sag-modal__close" onClick={onClose} aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
 
@@ -198,6 +250,7 @@ function AGServiceModal({ service, detail, onClose }: AGServiceModalProps) {
                   key={src}
                   src={src}
                   alt=""
+                  loading="lazy"
                   className={`sag-modal-img sag-modal-img--${i + 1}`}
                 />
               ))}
@@ -207,11 +260,11 @@ function AGServiceModal({ service, detail, onClose }: AGServiceModalProps) {
           {/* Right — content */}
           <div className="sag-modal__right">
             <span className="sag-eyebrow">{service.eyebrow ?? 'Treatment'}</span>
-            <h3 className="sag-modal__title">{service.title}</h3>
+            <h3 id="sag-modal-title" className="sag-modal__title">{service.title}</h3>
             <div className="sag-modal__rule" aria-hidden="true" />
             <div className="sag-modal__body">
-              {detail.paragraphs.map((p) => (
-                <p key={p.slice(0, 28)}>{p}</p>
+              {detail.paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
               ))}
             </div>
             <a
@@ -330,15 +383,27 @@ function BASlider({ beforeImg, afterImg, label }: BASliderProps) {
     dragging.current = false
   }
 
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') setPos((p) => Math.max(0, p - 5))
+    if (e.key === 'ArrowRight') setPos((p) => Math.min(100, p + 5))
+  }
+
   return (
     <div className="sag-slider">
       <div
         ref={trackRef}
         className="sag-slider__track"
+        role="slider"
+        tabIndex={0}
+        aria-label={label}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(pos)}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerUp}
+        onKeyDown={onKeyDown}
       >
         <img src={beforeImg} alt="" className="sag-slider__before-img" draggable={false} />
         <div
@@ -473,7 +538,7 @@ function AGTestimonialsSection() {
             </div>
 
             <footer className="sag-tc__footer">
-              <img src={current.avatar} alt="" className="sag-tc__avatar" />
+              <img src={current.avatar} alt="" loading="lazy" className="sag-tc__avatar" />
               <div className="sag-tc__author">
                 <span className="sag-tc__name">{current.name}</span>
                 <span className="sag-tc__service">{current.service}</span>
@@ -567,7 +632,11 @@ function AGFooterSection() {
     <footer className="sag-footer">
       <div className="sag-footer__inner">
         <div className="sag-footer__brand">
-          <div className="sag-footer__logo">Studio AG</div>
+          <img
+            src="/images/studio-ag/logo/logo.svg"
+            alt="Studio AG"
+            className="sag-footer__logo"
+          />
           <p className="sag-footer__tagline">
             Beauty with purpose.
             <br />
